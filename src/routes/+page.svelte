@@ -10,7 +10,7 @@
 
 	const width: number = 960;
 	const height: number = 500;
-	const margin = { top: 20, right: 30, bottom: 40, left: 220 };
+	const margin = { top: 20, right: 30, bottom: 50, left: 220 };
 	const innerHeight = height - margin.top - margin.bottom;
 	const innerWidth = width - margin.left - margin.right;
 	const yValue = (d: any) => d.Country;
@@ -31,6 +31,19 @@
 	<g transform={`translate(${margin.left}, ${margin.top})`}>
 		<AxisX {xScale} {innerHeight} />
 		<AxisY {yScale} />
+		<text
+			class="axis-label"
+			x={innerWidth / 2}
+			y={innerHeight + 40}
+			text-anchor="middle"
+			fill="#635F5D">Population</text
+		>
 		<Bars data={$chartData.slice(0, maxItems)} {xScale} {yScale} {yValue} {xValue} />
 	</g>
 </svg>
+
+<style>
+	.axis-label {
+		font-size: 1.5em;
+	}
+</style>
