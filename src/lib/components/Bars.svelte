@@ -4,6 +4,7 @@
 	export let yScale: any;
 	export let xValue: any;
 	export let yValue: any;
+	export let toolTipFormat: any;
 </script>
 
 {#each data as item, i}
@@ -13,5 +14,7 @@
 		width={xScale(xValue(item))}
 		height={yScale.bandwidth()}
 		fill="#137B80"
-	/>
+	>
+		<title>{toolTipFormat(xValue(item) * 1000)}</title>
+	</rect>
 {/each}

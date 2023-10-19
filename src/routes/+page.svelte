@@ -41,7 +41,14 @@
 			text-anchor="middle"
 			fill="#635F5D">Population</text
 		>
-		<Bars data={$chartData.slice(0, maxItems)} {xScale} {yScale} {yValue} {xValue} />
+		<Bars
+			data={$chartData.slice(0, maxItems)}
+			{xScale}
+			{yScale}
+			{yValue}
+			{xValue}
+			toolTipFormat={xAxisTickFormat}
+		/>
 	</g>
 </svg>
 
