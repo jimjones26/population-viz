@@ -7,5 +7,11 @@
 </script>
 
 {#each data as item, i}
-	<rect x={0} y={yScale(yValue(item))} width={xScale(xValue(item))} height={yScale.bandwidth()} />
+	<rect
+		x={0}
+		y={yScale(yValue(item))}
+		width={xScale(xValue(item))}
+		height={yScale.bandwidth()}
+		fill="#137B80"
+	/>
 {/each}
