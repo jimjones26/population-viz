@@ -19,7 +19,8 @@
 	const yScale = d3
 		.scaleBand()
 		.domain($chartData.slice(0, maxItems).map(yValue))
-		.range([0, innerHeight]);
+		.range([0, innerHeight])
+		.padding(0.1);
 	const xScale = d3
 		.scaleLinear()
 		.domain([0, d3.max($chartData.slice(0, maxItems), xValue)])
