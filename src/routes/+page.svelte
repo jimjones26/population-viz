@@ -26,7 +26,7 @@
 	<g transform={`translate(${margin.left}, ${margin.top})`}>
 		<AxisX {xScale} {innerHeight} />
 		<AxisY {yScale} />
-		{#each $chartData.slice(0, 10) as item}
+		{#each $chartData.slice(0, 10) as item, i}
 			<rect
 				x={0}
 				y={yScale(item.Country)}
