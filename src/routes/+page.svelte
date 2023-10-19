@@ -1,4 +1,5 @@
 <script lang="ts">
+	import AxisX from '$lib/components/AxisX.svelte';
 	import * as d3 from 'd3';
 	import { getContext } from 'svelte';
 
@@ -24,6 +25,7 @@
 
 <svg {width} {height}>
 	<g transform={`translate(${margin.left}, ${margin.top})`}>
+		<AxisX {xScale} {innerHeight} />
 		{#each $chartData.slice(0, 10) as item}
 			<rect
 				x={0}
