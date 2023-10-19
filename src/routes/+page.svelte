@@ -16,6 +16,9 @@
 	const yValue = (d: any) => d.Country;
 	const xValue = (d: any) => parseFloat(d['2020']);
 
+	const siFormat = d3.format('.2s');
+	const xAxisTickFormat = (tickValue: any) => siFormat(tickValue).replace('G', 'B');
+
 	const yScale = d3
 		.scaleBand()
 		.domain($chartData.slice(0, maxItems).map(yValue))
@@ -29,7 +32,7 @@
 
 <svg {width} {height}>
 	<g transform={`translate(${margin.left}, ${margin.top})`}>
-		<AxisX {xScale} {innerHeight} tickFormat={(n) => d3.format('.2s')(n).replace('G', 'B')} />
+		<AxisX {xScale} {innerHeight} tickFormat={xAxisTickFormat} />
 		<AxisY {yScale} />
 		<text
 			class="axis-label"
