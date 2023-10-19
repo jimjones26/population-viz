@@ -1,6 +1,7 @@
 <script lang="ts">
 	import AxisX from '$lib/components/AxisX.svelte';
 	import AxisY from '$lib/components/AxisY.svelte';
+	import Bars from '$lib/components/Bars.svelte';
 	import * as d3 from 'd3';
 	import { getContext } from 'svelte';
 
@@ -26,13 +27,6 @@
 	<g transform={`translate(${margin.left}, ${margin.top})`}>
 		<AxisX {xScale} {innerHeight} />
 		<AxisY {yScale} />
-		{#each $chartData.slice(0, 10) as item, i}
-			<rect
-				x={0}
-				y={yScale(item.Country)}
-				width={xScale(parseFloat(item['2020']))}
-				height={yScale.bandwidth()}
-			/>
-		{/each}
+		<Bars data={$chartData.slice(0, 10)} {xScale} {yScale} />
 	</g>
 </svg>
