@@ -10,7 +10,7 @@
 
 	const width: number = 960;
 	const height: number = 500;
-	const margin = { top: 20, right: 20, bottom: 20, left: 200 };
+	const margin = { top: 20, right: 30, bottom: 40, left: 220 };
 	const innerHeight = height - margin.top - margin.bottom;
 	const innerWidth = width - margin.left - margin.right;
 	const yValue = (d: any) => d.Country;
