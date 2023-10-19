@@ -6,6 +6,7 @@
 	import { getContext } from 'svelte';
 
 	const chartData: any = getContext('csvData');
+	let maxItems: number = 10;
 
 	const width: number = 960;
 	const height: number = 500;
@@ -15,11 +16,11 @@
 
 	const yScale = d3
 		.scaleBand()
-		.domain($chartData.slice(0, 10).map((d: any) => d.Country))
+		.domain($chartData.slice(0, maxItems).map((d: any) => d.Country))
 		.range([0, innerHeight]);
 	const xScale = d3
 		.scaleLinear()
-		.domain([0, d3.max($chartData.slice(0, 10), (d: any) => parseFloat(d['2020']))])
+		.domain([0, d3.max($chartData.slice(0, maxItems), (d: any) => parseFloat(d['2020']))])
 		.range([0, innerWidth]);
 </script>
 
@@ -27,6 +28,6 @@
 	<g transform={`translate(${margin.left}, ${margin.top})`}>
 		<AxisX {xScale} {innerHeight} />
 		<AxisY {yScale} />
-		<Bars data={$chartData.slice(0, 10)} {xScale} {yScale} />
+		<Bars data={$chartData.slice(0, maxItems)} {xScale} {yScale} />
 	</g>
 </svg>
