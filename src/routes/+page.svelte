@@ -6,25 +6,31 @@
 
 	const width: number = 960;
 	const height: number = 500;
+	const margin = { top: 20, right: 20, bottom: 20, left: 20 };
+	const innerHeight = height - margin.top - margin.bottom;
+	const innerWidth = width - margin.left - margin.right;
+
 	const yScale = d3
 		.scaleBand()
 		.domain($chartData.slice(0, 10).map((d: any) => d.Country))
-		.range([0, height]);
+		.range([0, innerHeight]);
 	const xScale = d3
 		.scaleLinear()
 		.domain([0, d3.max($chartData.slice(0, 10), (d: any) => parseFloat(d['2020']))])
-		.range([0, width]);
+		.range([0, innerWidth]);
 
 	$: console.log(parseFloat($chartData[0]['2020']));
 </script>
 
 <svg {width} {height}>
-	{#each $chartData.slice(0, 10) as item}
-		<rect
-			x={0}
-			y={yScale(item.Country)}
-			width={xScale(parseFloat(item['2020']))}
-			height={yScale.bandwidth()}
-		/>
-	{/each}
+	<g transform={`translate(${margin.left}, ${margin.top})`}>
+		{#each $chartData.slice(0, 10) as item}
+			<rect
+				x={0}
+				y={yScale(item.Country)}
+				width={xScale(parseFloat(item['2020']))}
+				height={yScale.bandwidth()}
+			/>
+		{/each}
+	</g>
 </svg>
