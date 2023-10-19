@@ -13,14 +13,16 @@
 	const margin = { top: 20, right: 20, bottom: 20, left: 200 };
 	const innerHeight = height - margin.top - margin.bottom;
 	const innerWidth = width - margin.left - margin.right;
+	const yValue = (d: any) => d.Country;
+	const xValue = (d: any) => parseFloat(d['2020']);
 
 	const yScale = d3
 		.scaleBand()
-		.domain($chartData.slice(0, maxItems).map((d: any) => d.Country))
+		.domain($chartData.slice(0, maxItems).map(yValue))
 		.range([0, innerHeight]);
 	const xScale = d3
 		.scaleLinear()
-		.domain([0, d3.max($chartData.slice(0, maxItems), (d: any) => parseFloat(d['2020']))])
+		.domain([0, d3.max($chartData.slice(0, maxItems), xValue)])
 		.range([0, innerWidth]);
 </script>
 
@@ -28,6 +30,6 @@
 	<g transform={`translate(${margin.left}, ${margin.top})`}>
 		<AxisX {xScale} {innerHeight} />
 		<AxisY {yScale} />
-		<Bars data={$chartData.slice(0, maxItems)} {xScale} {yScale} />
+		<Bars data={$chartData.slice(0, maxItems)} {xScale} {yScale} {yValue} {xValue} />
 	</g>
 </svg>
