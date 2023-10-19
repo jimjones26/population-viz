@@ -29,7 +29,7 @@
 
 <svg {width} {height}>
 	<g transform={`translate(${margin.left}, ${margin.top})`}>
-		<AxisX {xScale} {innerHeight} />
+		<AxisX {xScale} {innerHeight} tickFormat={(n) => d3.format('.2s')(n).replace('G', 'B')} />
 		<AxisY {yScale} />
 		<text
 			class="axis-label"
