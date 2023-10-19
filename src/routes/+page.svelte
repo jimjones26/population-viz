@@ -10,16 +10,20 @@
 
 	const width: number = 960;
 	const height: number = 500;
-	const margin = { top: 20, right: 20, bottom: 20, left: 200 };
+	const margin = { top: 20, right: 30, bottom: 50, left: 220 };
 	const innerHeight = height - margin.top - margin.bottom;
 	const innerWidth = width - margin.left - margin.right;
 	const yValue = (d: any) => d.Country;
 	const xValue = (d: any) => parseFloat(d['2020']);
 
+	const siFormat = d3.format('.2s');
+	const xAxisTickFormat = (tickValue: any) => siFormat(tickValue).replace('G', 'B');
+
 	const yScale = d3
 		.scaleBand()
 		.domain($chartData.slice(0, maxItems).map(yValue))
-		.range([0, innerHeight]);
+		.range([0, innerHeight])
+		.padding(0.1);
 	const xScale = d3
 		.scaleLinear()
 		.domain([0, d3.max($chartData.slice(0, maxItems), xValue)])
@@ -28,8 +32,28 @@
 
 <svg {width} {height}>
 	<g transform={`translate(${margin.left}, ${margin.top})`}>
-		<AxisX {xScale} {innerHeight} />
+		<AxisX {xScale} {innerHeight} tickFormat={xAxisTickFormat} />
 		<AxisY {yScale} />
-		<Bars data={$chartData.slice(0, maxItems)} {xScale} {yScale} {yValue} {xValue} />
+		<text
+			class="axis-label"
+			x={innerWidth / 2}
+			y={innerHeight + 40}
+			text-anchor="middle"
+			fill="#635F5D">Population</text
+		>
+		<Bars
+			data={$chartData.slice(0, maxItems)}
+			{xScale}
+			{yScale}
+			{yValue}
+			{xValue}
+			toolTipFormat={xAxisTickFormat}
+		/>
 	</g>
 </svg>
+
+<style>
+	.axis-label {
+		font-size: 1.5em;
+	}
+</style>
